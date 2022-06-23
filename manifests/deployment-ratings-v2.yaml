@@ -21,5 +21,5 @@ spec:
     spec:
       containers:
       - name: ratings
-        image: quay.io/jkap/ratings:v2
+        image: quay.io/srereddy/sample:ratings-v2
         imagePullPolicy: IfNotPresent
