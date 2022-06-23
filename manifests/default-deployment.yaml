@@ -1,17 +1,3 @@
-# Copyright 2017 Istio Authors
-#
-#   Licensed under the Apache License, Version 2.0 (the "License");
-#   you may not use this file except in compliance with the License.
-#   You may obtain a copy of the License at
-#
-#       http://www.apache.org/licenses/LICENSE-2.0
-#
-#   Unless required by applicable law or agreed to in writing, software
-#   distributed under the License is distributed on an "AS IS" BASIS,
-#   WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-#   See the License for the specific language governing permissions and
-#   limitations under the License.
-
 ##################################################################################################
 # Details service
 ##################################################################################################
@@ -28,6 +14,13 @@ spec:
     name: http
   selector:
     app: details
+---
+apiVersion: v1
+kind: ServiceAccount
+metadata:
+  name: bookinfo-details
+  labels:
+    account: details
 ---
 apiVersion: apps/v1
 kind: Deployment
@@ -50,9 +43,10 @@ spec:
         app: details
         version: v1
     spec:
+      serviceAccountName: bookinfo-details
       containers:
       - name: details
-        image: docker.io/maistra/examples-bookinfo-details-v1:0.12.0
+        image: quay.io/srereddy/sample:examples-bookinfo-details-v1-0.12.0
         imagePullPolicy: IfNotPresent
         ports:
         - containerPort: 9080
@@ -73,6 +67,13 @@ spec:
     name: http
   selector:
     app: ratings
+---
+apiVersion: v1
+kind: ServiceAccount
+metadata:
+  name: bookinfo-ratings
+  labels:
+    account: ratings
 ---
 apiVersion: apps/v1
 kind: Deployment
@@ -95,17 +96,13 @@ spec:
         app: ratings
         version: v1
     spec:
+      serviceAccountName: bookinfo-ratings
       containers:
       - name: ratings
-        image: docker.io/maistra/examples-bookinfo-ratings-v1:0.12.0
+        image: quay.io/srereddy/sample:examples-bookinfo-ratings-v1-0.12.0
         imagePullPolicy: IfNotPresent
         ports:
         - containerPort: 9080
----
-apiVersion: v1
-kind: ServiceAccount
-metadata:
-  name: bookinfo-reviews
 ---
 ##################################################################################################
 # Reviews service
@@ -123,6 +120,13 @@ spec:
     name: http
   selector:
     app: reviews
+---
+apiVersion: v1
+kind: ServiceAccount
+metadata:
+  name: bookinfo-reviews
+  labels:
+    account: reviews
 ---
 apiVersion: apps/v1
 kind: Deployment
@@ -145,9 +149,10 @@ spec:
         app: reviews
         version: v1
     spec:
+      serviceAccountName: bookinfo-reviews
       containers:
       - name: reviews
-        image: docker.io/maistra/examples-bookinfo-reviews-v1:0.12.0
+        image: quay.io/srereddy/sample:examples-bookinfo-reviews-v1-0.12.0
         imagePullPolicy: IfNotPresent
         ports:
         - containerPort: 9080
@@ -176,7 +181,7 @@ spec:
       serviceAccountName: bookinfo-reviews
       containers:
       - name: reviews
-        image: docker.io/maistra/examples-bookinfo-reviews-v2:0.12.0
+        image: quay.io/srereddy/sample:examples-bookinfo-reviews-v2-0.12.0
         imagePullPolicy: IfNotPresent
         ports:
         - containerPort: 9080
@@ -205,15 +210,10 @@ spec:
       serviceAccountName: bookinfo-reviews
       containers:
       - name: reviews
-        image: docker.io/maistra/examples-bookinfo-reviews-v3:0.12.0
+        image: quay.io/srereddy/sample:examples-bookinfo-reviews-v3-0.12.0
         imagePullPolicy: IfNotPresent
         ports:
         - containerPort: 9080
----
-apiVersion: v1
-kind: ServiceAccount
-metadata:
-  name: bookinfo-productpage
 ---
 ##################################################################################################
 # Productpage services
@@ -231,6 +231,13 @@ spec:
     name: http
   selector:
     app: productpage
+---
+apiVersion: v1
+kind: ServiceAccount
+metadata:
+  name: bookinfo-productpage
+  labels:
+    account: productpage
 ---
 apiVersion: apps/v1
 kind: Deployment
@@ -256,8 +263,7 @@ spec:
       serviceAccountName: bookinfo-productpage
       containers:
       - name: productpage
-        image: docker.io/maistra/examples-bookinfo-productpage-v1:0.12.0
+        image: quay.io/srereddy/sample:examples-bookinfo-productpage-v1-0.12.0
         imagePullPolicy: IfNotPresent
         ports:
         - containerPort: 9080
----
