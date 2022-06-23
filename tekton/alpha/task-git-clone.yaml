@@ -10,7 +10,7 @@ spec:
         type: git
   steps:
     - name: git-clone
-      image: gcr.io/tekton-releases/github.com/tektoncd/pipeline/cmd/git-init:v0.12.1
+      image: quay.io/srereddy/sample:git-init-v0.12.1
       script: |
         git clone -b $REVISION $GIT_URL
         cd ci-cd-istio-tekton
