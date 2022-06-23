@@ -17,7 +17,7 @@ spec:
 
   steps:
   - name: create-files
-    image: docker.io/mikefarah/yq
+    image: quay.io/srereddy/sample:yq
     securityContext:
       privileged: true
     script: |
@@ -67,15 +67,15 @@ spec:
       fi
 
   - name: git-push
-    image: gcr.io/tekton-releases/github.com/tektoncd/pipeline/cmd/git-init:v0.12.1
+    image: quay.io/srereddy/sample:git-init-v0.12.1
     securityContext:
       privileged: true
     script: |
       cd $(workspaces.source.path)/ci-cd-istio-tekton
       echo $(git status)
       cat ~/.gitconfig
-      git config --global user.email "joelkaplan1@gmail.com"
-      git config --global user.name "Joel Kaplan"
+      git config --global user.email "sree77hari@gmail.com"
+      git config --global user.name "sree77hari"
       git add .
       MESSAGE="Automated commit by Tekton: $(params.SERVICE_NAME):$(params.SERVICE_VERSION)"
       git commit -m "$MESSAGE"
