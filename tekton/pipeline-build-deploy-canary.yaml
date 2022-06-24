@@ -5,6 +5,7 @@ metadata:
 spec:
   workspaces:
     - name: build-deploy-workspace
+    - name: gitops-workspace
   params:
     - name: GIT_URL
       type: string 
@@ -51,20 +52,20 @@ spec:
           workspace: build-deploy-workspace
       runAfter:
         - git-clone
-    - name: canary-rollout
-      taskRef:
-        name: canary-rollout
-      params: 
-        - name: SERVICE_NAME
-          value: "$(params.SERVICE_NAME)"
-        - name: IMAGE_REPOSITORY
-          value: "$(params.IMAGE_REPOSITORY)"
-        - name: SERVICE_VERSION
-          value: "$(params.SERVICE_VERSION)"
-      workspaces:
-        - name: source
-          workspace: build-deploy-workspace
+    - name: gitops-task
       runAfter:
-        - build-service
+          - buildah-img-build
+      taskRef:
+        name: gitops-task
+      params:
+      - name: configGitUrl
+        value: 'https://github.com/sree77hari/ci-cd-istio-tekton.git'
+      - name: environment
+        value: 'manifests'
+      - name: imageName
+        value: 'quay.io/srereddy/sample:$(params.SERVICE_NAME)-$(params.SERVICE_VERSION)'
+      workspaces:
+      - name: gitops-workspace
+        workspace: gitops-workspace
       
         
