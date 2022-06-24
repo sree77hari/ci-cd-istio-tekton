@@ -22,7 +22,7 @@ spec:
       serviceAccountName: bookinfo-productpage
       containers:
       - name: productpage
-        image: quay.io/srereddy/sample:productpage-v1.1-v1.0
+        image: quay.io/srereddy/sample:productpagev1.0
         imagePullPolicy: IfNotPresent
         ports:
         - containerPort: 9080
