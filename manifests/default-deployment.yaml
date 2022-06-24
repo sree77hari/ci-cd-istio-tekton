@@ -238,5 +238,4 @@ metadata:
   name: bookinfo-productpage
   labels:
     account: productpage
----
 
