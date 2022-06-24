@@ -54,7 +54,7 @@ spec:
         - git-clone
     - name: gitops-task
       runAfter:
-          - buildah-img-build
+          - build-service
       taskRef:
         name: gitops-task
       params:
