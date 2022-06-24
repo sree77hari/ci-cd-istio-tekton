@@ -7,8 +7,11 @@ spec:
     istio: ingressgateway # use istio default controller
   servers:
   - port:
-      number: 80
-      name: http
-      protocol: HTTP
+      name: https-default
+      number: 443
+      protocol: HTTPS
     hosts:
-    - "*"
+      - '*'
+    tls:
+      credentialName: ingress-cert # this should match with Certificate secretName
+      mode: SIMPLE
