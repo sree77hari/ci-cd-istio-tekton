@@ -9,9 +9,5 @@ spec:
   - route:
     - destination:
         host: ratings
-        subset: v2
-      weight: 10
-    - destination:
-        host: ratings
         subset: v1
-      weight: 90
+      weight: 100
